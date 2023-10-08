@@ -1,56 +1,51 @@
-# Webapp-Cookbook
-## Goal  
-Implement a small selection of cookbook recipes, along with a substitution calculator. Might have a search aswell, along the lines of "show me recipes including X, Y, and Z".  
-E.g.,  
-"What can I replace Egg with?",
-"How do I make Sugar Cookies?",
-"Show me every recipe that uses Mayonnaise",
-"Show me recipes from Betty Crocker's 2010 Print"
+# Tables
+### Recipe
 
-## Tables/Types
+(PK) RecipeID  
+Name  
+Page  
+(FK) CookbookID   
 
-### Vague Diagram/Schema
-|Substitutions| -> |Ingredients| -> |Recipe| <- |Cookbook|
-Recipes will refer to both cookbooks and ingredients, and the ingredients will also refer to substitutions.
+RecipeID: Generated surrogate key for the entity.  
+Name: The name of the recipe.  
+Page: The webpage contents.  
 
-### Recipes:  
-Recipe Name | Ingredient List | Cooking Directions | Cookbook
---- | --- | --- | --- 
-Cookies | Egg (Refers to Ingredients) | Bake for X time | Crocker (Refers to Cookbooks)
+### Cookbook
 
-The ingredient list in the recipe doesn't concern itself with specific quantities -- that's for the cooking directions. The ingredient list just goes over 'what' you're putting in, not how much.
-The cooking directions will be a full description of how you cook it, and will display when you examine a recipe on the site.   
-I considered implementing a quick replacement field in the ingredient list (e.g., replace "2 egg" with "130g of blood") but there's so many instances that I might miss, even if I just have flags in the cooking directions for it.
-I'd much rather just stick with a substitute calculator/index.
+(PK) CookbookID  
+Name  
+Edition  
+Genre  
 
-### Ingredients:
-Ingredient Name | Substitute IDs
---- | --- 
-Egg | 5 (Refers to Substitutions)
+CookbookID: Generated surrogate key for the entity.  
+Name: The name of the cookbook.  
+Edition: The printed edition of the cookbook, including versions.  
+Genre: The 'type' of food contained by the cookbook, or atleast the majority of recipes.  
 
-Really only used for two things -- the search function ("show me all recipes containing egg") and listing substitutions.  
-When I'm setting up the search function, I'll probably have a way to iterate through ingredients in this DB to keep it dynamic and in sync.
+### Recipe Ingredient Link
+(FK) RecipeID  
+(FK) IngredientID  
 
-### Substitutions:
-Substitution ID | Substitute | Ratio
---- | --- | --- 
-5 | Blood | 65g per 1 egg
-6 | Yogurt | 1 cup per 1 cup of sour cream
-7 | Yogurt | 1 cup per 1 cup of mayonnaise
+Notes on the Link Table:  
+This table lists the Main Ingredients of a recipe, not including substitutions. If an ingredient is optional, it is **not included** in the link table. 
 
-As far as my experience goes, one thing will either be a specific substitute for just one ingredient, or rarely two. Thus, I want to refer to it by ID. 
-E.g., here's the yogurt substitution for mayo, and here's the yogurt substitution for sour cream.  
-It'll display as a list of ingredients to substitute, select one, and it'll show the names of the substitution in bold and then the ratio next to it.  
-Mayo - **Yogurt** (1cup:1cup), **Sour Cream** (1cup:1cup)  
-Egg - **Blood** (65g:1egg)  
-An optional route to go could be also showing "What can I replace with Yogurt?" and it'll return a list matching "Yogurt" in the Substitute column. Not vital, but maybe neat?
+### Ingredient
+(PK) IngredientID  
+Name  
 
-### Cookbook:
-Cookbook | Printing Date
---- | --- 
-Betty Crocker | 2010
+IngredientID: Generated surrogate key for the entity.  
+Name: The name of the ingredient
 
-A somewhat 'last minute' addition to reach 4 data types, but makes sense if you wanted to just use recipes from one book -- or to find what book something is from.  
-Somewhat helpful if you want to cook, say, baked goods specifically, and then you don't have to sift through recipes from "101 Ways to Make Broth"
+Notes on Ingredient's subtypes:  
+A food is determined "vegan" and features a suffix "VE" at the end of the ingredientID. Such as, ID 50 would be 50VE as a composite key.  
+Non vegan foods are as is, with just the surrogate primary key. In essential, the **Vegan subtype features an attribute of "ID Suffix" with the value 'VE' to form an identifiable composite key.**
+
+### Ingredient Substitution Self-Referential Link Table
+(FK) IngredientID  
+(FK) IngredientID  
+
+Notes on combinations:  
+Substitutions are two-way, meaning Butter - Margarine is the same as Margarine - Butter. These values could be rearranged to include both versions in the act of denormalization to improve speed (e.g., only search 1 column for the ingredient ID).
+
 
 
