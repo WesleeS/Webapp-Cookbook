@@ -1,0 +1,3 @@
+### Notes:
+Funny enough, I had to go back to my very first design nearly, as I changed my link table design for the substitutions to be a plural attribute. To atomize it, I had to, well, go back to the link table. An ingredient can still be included in multiple substitutions so the link table is the proper way to break it up
+That was the only change, however. I used surrogate keys for all of my primary keys since the very start and kept my attributes very trimmed. The only change was to reach 1st normal form by reducing my plural attribute. There were never any other candidate keys to worry about, and no transitive dependancies (though, I could have had one if I had both edition and date as the edition would have implied the date and vice versa).
