@@ -1,5 +1,5 @@
 # Tables
-### Recipe
+### Recipe Table
 
 (PK) RecipeID  
 Name  
@@ -10,7 +10,7 @@ RecipeID: Generated surrogate key for the entity.
 Name: The name of the recipe.  
 Page: The webpage contents.  
 
-### Cookbook
+### Cookbook Table
 
 (PK) CookbookID  
 Name  
@@ -22,14 +22,14 @@ Name: The name of the cookbook.
 Edition: The printed edition of the cookbook, including versions.  
 Genre: The 'type' of food contained by the cookbook, or atleast the majority of recipes.  
 
-### Recipe Ingredient Link
+### Recipe Ingredient Link Table
 (FK) RecipeID  
 (FK) IngredientID  
 
 Notes on the Link Table:  
 This table lists the Main Ingredients of a recipe, not including substitutions. If an ingredient is optional, it is **not included** in the link table. 
 
-### Ingredient
+### Ingredient Table
 (PK) IngredientID  
 Name  
 
