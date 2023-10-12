@@ -8,7 +8,7 @@ Page
 
 RecipeID: Generated surrogate key for the entity.  
 Name: The name of the recipe.  
-Page: The webpage contents.  
+Page: The webpage contents.  It'll be a string pointing to an xml or html file in the container. E.g., Page: "/ChocolateChip01". Formatted as Name+ID
 
 ### Cookbook Table
 
