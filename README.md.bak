@@ -37,7 +37,8 @@ IngredientID: Generated surrogate key for the entity.
 Name: The name of the ingredient
 
 Notes on Ingredient's subtypes:  
-
+A food is determined "vegan" and features a suffix "VE" at the end of the ingredientID. Such as, ID 50 would be 50VE as a composite key.  
+Non vegan foods are as is, with just the surrogate primary key. In essence, the **Vegan subtype features an attribute of "IsVegan" with the value 'VE' to form an identifiable composite key.** If we had to remove the subtable, we could make "isVegan" a nullable value when not.
 
 ### Ingredient Substitution Self-Referential Link Table
 (FK) IngredientID  
