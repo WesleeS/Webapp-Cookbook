@@ -4,10 +4,16 @@
 
 {% block content %}
     <form action="/submit" method="get">
-        <input type="text" id="recipeID" placeholder="Enter Recipe ID">
-        <input type="text" id="recipeName" placeholder="Enter Recipe Name">
-        <input type="text" id="recipePage" placeholder="Enter Recipe Page URL">
-        <input type="text" id="recipeBook" placeholder="Enter Recipe Cookbook">
+        <p> Recipe ID*: <p>
+            <input type="text" id="recipeID" name="recipeID" placeholder="Enter Recipe ID">
+        <p> Recipe Name: <p>
+            <input type="text" id="recipeName" name="recipeName" placeholder="Enter Recipe Name">
+        <p> Recipe Recipe Page**: <p>
+            <input type="text" id="recipePage" name="recipePage" placeholder="Enter Recipe Page URL">
+        <p> Recipe Book of Origin: <p>
+            <input type="text" id="recipeBook" name="recipeBook" placeholder="Enter Recipe Cookbook">
         <input type="submit" value="Submit">
     </form>
+    <p>* In the final product, this'll be auto assigned via increment</p>
+    <p>**Similar, the final page is in the format of "./recipeNUM" and shouldn't be assigned manually</p>
 {% endblock %}
