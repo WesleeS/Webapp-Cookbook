@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Table View{% endblock %}
+{% block stylesheet %}"./static/tableStyle.css"{% endblock %}
+
+{% block content %}
+
+<table style="border: 1px solid black">
+    <tr>
+        <th style="border-bottom: 1px solid black">RecipeID</th>
+        <th style="border-bottom: 1px solid black">RecipeName</th>
+        <th style="border-bottom: 1px solid black">Page</th>
+        <th style="border-bottom: 1px solid black">CookBook</th>
+    </tr>
+    <tr>
+        <td>0</td>
+        <td>Fudge Melt-Away Squares</td>
+        <td><a href="./recipe0.html">./recipe0.html</a></td>
+        <td>Betty Crocker: Best of Baking</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Fudge Tart</td>
+        <td><a href="./recipe1.html">./recipe1.html</a></td>
+        <td>Betty Crocker: Best of Baking</td>
+    </tr>
+    <tr>
+        <td>{{recipeID}}</td>
+        <td>{{recipeName}}</td>
+        <td><a href="{{recipePage}}">{{recipePage}}</a></td>
+        <td>{{recipeBook}}</td>
+    <tr>
+</table>
+
+{% endblock%}

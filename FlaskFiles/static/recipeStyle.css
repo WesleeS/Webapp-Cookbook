@@ -1,0 +1,25 @@
+body{
+    background-color: #faf4ed;
+    color: #191724;
+    font-size: 1em;
+}
+.recipeColumns{
+    display: flex;
+    flex-direction: row;
+    padding: 1em;
+}
+
+.recipeColumns > .left{
+    width: 30em;
+}
+.recipeColumns > .right{
+padding-left: 2em;
+}
+
+.recipeBody{
+    width: 50em;
+}
+
+th{
+    border-bottom: 1px dotted #191724;
+  }

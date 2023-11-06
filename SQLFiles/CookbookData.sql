@@ -21,6 +21,9 @@ Insert Into VeganDetail(FoodType, IsImitation, GlutenFree) Values (
 Insert Into VeganDetail(FoodType, IsImitation, GlutenFree) Values (
     'nut', 1, 1
 );
+Insert Into VeganDetail(FoodType, IsImitation, GlutenFree) Values (
+    'grain', 1, 1
+);
 
 Insert Into Ingredient (Name, VeID) Values (
     'butter', NULL
@@ -55,6 +58,9 @@ Insert Into Ingredient (Name, VeID) Values (
 Insert Into Ingredient (Name, VeID) Values (
     'almond milk', 5
 );
+Insert Into Ingredient (Name, VeID) Values (
+    'oat milk', 6
+);
 
 Insert Into RecipeIngredientLink (RecipeID, IngredientID) Values (
     1, 1
@@ -86,3 +92,27 @@ Insert Into RecipeIngredientLink (RecipeID, IngredientID) Values (
 Insert Into RecipeIngredientLink (RecipeID, IngredientID) Values (
     1, 10
 );
+
+Select *
+From (
+    Select R.RecipeID, R.Name as RecipeName, I.Name as IngredientName, I.IngredientID
+    From Recipe as R 
+    Left Join RecipeIngredientLink as L on R.RecipeID = L.RecipeID
+    Left Join Ingredient as I on L.IngredientID = I.IngredientID
+) 
+as RecipeList
+Where RecipeID = 1;
+
+
+Select IngredientID, Name as "Substitution for Almond Milk"
+From Ingredient
+Join (
+    Select FirstSub as Sub
+    From IngredientSubstitution
+    Where SecondSub = 11
+    Union
+    Select SecondSub as Sub
+    From IngredientSubstitution
+    Where FirstSub = 11
+)
+as Substitution on Ingredient.IngredientID = Substitution.Sub;
